@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f8f6">
+  <title>CityCare 360 — Hospital coordination demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo">✚</div>
+        <div><strong>CityCare 360</strong><small>Care in sync</small></div>
+      </div>
+      <div>
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="nav">
+          <button class="active" data-view="dashboard"><span class="ico">⌂</span><span>Overview</span></button><button
+            data-view="records"><span class="ico">▤</span><span>Waste records</span></button><button
+            data-view="pickups"><span class="ico">↗</span><span>Pickup tracking</span></button><button
+            data-view="lookup"><span class="ico">⌕</span><span>QR lookup</span></button><button
+            data-view="assistant"><span class="ico">✳</span><span>Care assistant</span></button><button
+            data-view="reports"><span class="ico">▥</span><span>Reports</span></button>
+        </nav>
+      </div>
+      <div class="side-foot"><b>Prototype workspace</b>Sample data for a hackathon demo. No patient information is
+        stored.</div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb">CityCare 360 <span> / </span><b id="crumb">Overview</b></div>
+        <div class="right"><select class="select" id="role">
+            <option>Hospital Admin</option>
+            <option>Ward Staff</option>
+            <option>Collection Partner</option>
+            <option>Patient</option>
+          </select>
+          <div class="avatar">AD</div>
+        </div>
+      </header>
+      <div class="content">
+        <section class="section active" id="dashboard">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Tuesday · Demo workspace</div>
+              <h1 class="h1">Good morning, team 👋</h1>
+              <p class="sub">One shared view for safer, smoother hospital coordination.</p>
+            </div>
+            <div class="date">📍 CityCare General · Demo data</div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-copy">
+              <div class="eyebrow">One connected care network</div>
+              <h2>Every ward. One clear picture.</h2>
+              <p>Coordinate records, pickup requests, and service updates from a shared workspace.</p><button
+                class="primary" id="startTour">▶ &nbsp;Start 30-sec demo</button>
+            </div>
+            <div class="hero-pill">● <span>Demo workspace</span> · sample records</div>
+          </div>
+          <div class="grid">
+            <div class="stat">
+              <div class="stat-head">Pending pickups <span class="stat-icon">♻</span></div>
+              <div class="stat-num" id="pendingCount">08</div>
+              <div class="stat-foot"><em>3 urgent</em> · across 4 wards</div>
+            </div>
+            <div class="stat">
+              <div class="stat-head">Collected today <span class="stat-icon">✓</span></div>
+              <div class="stat-num">24</div>
+              <div class="stat-foot">Across <em>6 collection runs</em></div>
+            </div>
+            <div class="stat">
+              <div class="stat-head">Open waste records <span class="stat-icon">▤</span></div>
+              <div class="stat-num" id="recordCount">12</div>
+              <div class="stat-foot"><em>4 categories</em> logged today</div>
+            </div>
+            <div class="stat">
+              <div class="stat-head">Service requests <span class="stat-icon">♡</span></div>
+              <div class="stat-num">06</div>
+              <div class="stat-foot"><em>2 awaiting reply</em></div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Pickup queue</h2>
+                  <p>Latest requests from hospital wards</p>
+                </div><button class="link" data-go="pickups">View all →</button>
+              </div>
+              <div class="queue" id="queue"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Recent activity</h2>
+                  <p>Updates from your workspace</p>
+                </div><button class="link" data-go="records">All activity →</button>
+              </div>
+              <div class="activity" id="activity">
+                <div class="activity-item"><span class="dot"></span>
+                  <div><strong>Ward B pickup completed</strong><small>12 minutes ago · Collection partner</small></div>
+                </div>
+                <div class="activity-item"><span class="dot"></span>
+                  <div><strong>New record added · Yellow bag</strong><small>38 minutes ago · Ward A</small></div>
+                </div>
+                <div class="activity-item"><span class="dot"></span>
+                  <div><strong>Pickup requested · Ward C</strong><small>1 hour ago · Ward staff</small></div>
+                </div>
+                <div class="activity-item"><span class="dot"></span>
+                  <div><strong>Service request answered</strong><small>2 hours ago · Care assistant</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="quick"><button data-go="records"><span class="qicon">＋</span><span><b>Add waste
+                  record</b><small>Log a category and location</small></span></button><button data-go="lookup"><span
+                class="qicon">⌕</span><span><b>Look up a QR code</b><small>Find a record by
+                  ID</small></span></button><button data-go="assistant"><span class="qicon">✳</span><span><b>Ask care
+                  assistant</b><small>Get basic service information</small></span></button></div>
+        </section>
+        <section class="section" id="records">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Operations · Demo data</div>
+              <h1 class="h1">Waste records</h1>
+              <p class="sub">Log and review segregated biomedical waste entries.</p>
+            </div><button class="primary" id="newRecord">＋ Add record</button>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Recent records</h2>
+                <p>Use sample IDs in the QR lookup demo.</p>
+              </div><select class="select" id="filter">
+                <option>All categories</option>
+                <option>Yellow</option>
+                <option>Red</option>
+                <option>White</option>
+                <option>Blue</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Ward</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Logged by</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recordTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section class="section" id="pickups">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Operations · Demo data</div>
+              <h1 class="h1">Pickup tracking</h1>
+              <p class="sub">Follow a request from the ward to collection.</p>
+            </div><button class="primary" id="requestPickup">＋ Request pickup</button>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Pickup requests</h2>
+                <p>Demo status updates are local to this browser.</p>
+              </div><span class="tag">3 awaiting collection</span>
+            </div>
+            <div class="queue" id="pickupQueue"></div>
+          </div>
+          <div class="panel" style="margin-top:16px">
+            <h2>How the workflow works</h2>
+            <div class="tracking">
+              <div class="step on"><span>1</span>Record</div>
+              <div class="step on"><span>2</span>Request</div>
+              <div class="step"><span>3</span>Collect</div>
+              <div class="step"><span>4</span>Review</div>
+            </div>
+            <p class="sub" style="text-align:center;font-size:12px">A simple software workflow — no sensors or IoT
+              hardware required.</p>
+          </div>
+        </section>
+        <section class="section" id="lookup">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Quick access</div>
+              <h1 class="h1">QR record lookup</h1>
+              <p class="sub">Enter a demo record ID to open its details.</p>
+            </div>
+          </div>
+          <div class="panel" style="max-width:760px">
+            <div class="panel-head">
+              <div>
+                <h2>Find a waste record</h2>
+                <p>Try CC-2401, CC-2402, or CC-2403.</p>
+              </div><span style="font-size:24px">▦</span>
+            </div>
+            <form class="lookup" id="lookupForm"><input id="lookupId" placeholder="Enter record ID, e.g. CC-2401"
+                required><button class="primary">Find record</button></form>
+            <div id="lookupResult" style="margin-top:16px"></div>
+            <div class="info" style="margin-top:20px">In a connected system, a QR code would point to a
+              permission-checked record page. This demo uses sample records only.</div>
+          </div>
+        </section>
+        <section class="section" id="assistant">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Basic information</div>
+              <h1 class="h1">Care assistant</h1>
+              <p class="sub">Ask about common hospital services or how to use this demo.</p>
+            </div>
+          </div>
+          <div class="panel" style="max-width:760px">
+            <div class="chatbox" id="chat">
+              <div class="bubble">Hi! I can help with basic service information and explain the CityCare 360 demo. What
+                would you like to know?</div>
+            </div>
+            <form class="chatform" id="chatForm"><input id="chatInput"
+                placeholder="Ask about pickup tracking, records, or services…" required><button
+                class="primary">Send</button></form>
+            <p style="font-size:10px;color:var(--muted);margin:12px 2px 0">This assistant provides general information
+              only. It cannot diagnose, recommend treatment, or handle emergencies.</p>
+          </div>
+        </section>
+        <section class="section" id="reports">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">Overview · Sample figures</div>
+              <h1 class="h1">Reports</h1>
+              <p class="sub">A quick view of demo collection activity by category.</p>
+            </div><button class="soft" id="downloadCsv">↓ Download CSV</button>
+          </div>
+          <div class="reportcards">
+            <div class="report"><b>32</b>
+              <div>Collections this week</div>
+            </div>
+            <div class="report"><b>94%</b>
+              <div>Requests marked complete</div>
+            </div>
+            <div class="report"><b>4</b>
+              <div>Waste categories tracked</div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px">
+            <h2>Records by category</h2>
+            <div class="barset">
+              <div class="barrow"><span>Yellow</span>
+                <div class="bar"><i style="width:82%"></i></div><b>41</b>
+              </div>
+              <div class="barrow"><span>Red</span>
+                <div class="bar"><i style="width:56%"></i></div><b>28</b>
+              </div>
+              <div class="barrow"><span>White</span>
+                <div class="bar"><i style="width:37%"></i></div><b>19</b>
+              </div>
+              <div class="barrow"><span>Blue</span>
+                <div class="bar"><i style="width:24%"></i></div><b>12</b>
+              </div>
+            </div>
+            <p style="font-size:10px;color:var(--muted);margin-top:17px">Illustrative demo figures only. Real deployment
+              must follow current, locally applicable biomedical waste rules.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div id="modal"
+    style="display:none;position:fixed;inset:0;background:#12251d70;z-index:9;place-items:center;padding:16px">
+    <div class="panel" style="width:min(560px,100%);box-shadow:0 20px 80px #10281e40">
+      <div class="panel-head">
+        <div>
+          <h2 id="modalTitle">Add waste record</h2>
+          <p>All fields are sample data for this prototype.</p>
+        </div><button class="link" id="closeModal">✕</button>
+      </div>
+      <form id="recordForm">
+        <div class="form-grid">
+          <div class="field"><label>Ward</label><select id="ward">
+              <option>Ward A</option>
+              <option>Ward B</option>
+              <option>Ward C</option>
+              <option>ICU</option>
+            </select></div>
+          <div class="field"><label>Waste category</label><select id="category">
+              <option>Yellow</option>
+              <option>Red</option>
+              <option>White</option>
+              <option>Blue</option>
+            </select></div>
+          <div class="field"><label>Quantity (bags)</label><input id="quantity" type="number" min="1" value="1"
+              required></div>
+          <div class="field"><label>Collected by</label><input id="loggedBy" value="Ward Staff" required></div>
+          <div class="field full"><label>Notes (optional)</label><input id="notes"
+              placeholder="Short note for the collection team"></div>
+        </div>
+        <div class="form-actions"><button type="button" class="soft" id="cancelModal">Cancel</button><button
+            class="primary">Save record</button></div>
+      </form>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
